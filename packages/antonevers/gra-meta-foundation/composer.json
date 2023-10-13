@@ -1,0 +1,21 @@
+{
+    "name": "antonevers/gra-meta-foundation",
+    "type": "metapackage",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "antonevers/gra-component-foundation": "~1.0",
+        "antonevers/module-gra": "~1.0",
+        "antonevers/module-3rdparty": "~1.0",
+        "magento/composer-dependency-version-audit-plugin": "1.0",
+        "magento/composer-root-update-plugin": "1.0",
+        "magento/product-enterprise-edition": "1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.1-dev"
+        }
+    }
+}

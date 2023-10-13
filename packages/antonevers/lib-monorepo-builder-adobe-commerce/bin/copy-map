@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
+
+if (PHP_SAPI !== 'cli') {
+    echo 'bin/copy-map must be run as a CLI application' . PHP_EOL;
+    exit(1);
+}
+
+require_once __DIR__ . '/../../../../vendor/autoload.php';
+$root = __DIR__ . '/../../../../';
+
+$filesystem = new Filesystem();
+$projectComposerJson = Path::makeAbsolute('composer.json', $root);
+
+if (!$filesystem->exists($projectComposerJson)) {
+    echo 'project composer.json not found, not in monorepo context?' . PHP_EOL;
+    exit(1);
+}
+
+$config = \json_decode(\file_get_contents($projectComposerJson), true);
+$extraMap = $config['extra']['map'] ?? [];
+foreach ($extraMap as $mapping) {
+    try {
+        if (!isset($mapping['source'], $mapping['dest'])) {
+            throw new \Exception('Invalid mapping');
+        }
+
+        $source = Path::makeAbsolute($mapping['source'], $root);
+        $dest = Path::makeAbsolute($mapping['dest'], $root);
+
+        $filesystem->mkdir(\dirname($dest));
+        if (is_dir($source)) {
+            $filesystem->mirror($source, $dest);
+        } else {
+            $filesystem->copy($source, $dest);
+        }
+    } catch (\Exception $e) {
+        echo $e->getMessage() . PHP_EOL;
+    }
+}
+echo 'Root composer mapping files copied' . PHP_EOL;
+exit(0);
