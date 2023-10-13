@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="3rdpartyTestCommand" xsi:type="object">AntonEvers\ThirdParty\Console\Command\TestCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AntonEvers\ThirdParty\Console\Command\TestCommand">
+        <arguments>
+            <argument name="pool" xsi:type="string">3rd party</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,124 @@
+{
+    "name": "antonevers/gra-monorepo",
+    "description": "Monorepo repository for Global Reference Architecture development",
+    "type": "project",
+    "license": [
+        "proprietary"
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "laminas/laminas-dependency-plugin": true,
+            "magento/*": true,
+            "php-http/discovery": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require": {
+        "php": "~8.1.0|~8.2.0",
+        "magento/composer-dependency-version-audit-plugin": "~0.1",
+        "magento/composer-root-update-plugin": "~2.0",
+        "magento/magento-composer-installer": "*",
+        "magento/product-enterprise-edition": "2.4.6-p3",
+        "symfony/filesystem": "~5.0|~6.0",
+        "symplify/monorepo-builder": "11.2.17"
+    },
+    "autoload": {
+        "exclude-from-classmap": [
+            "**/Test/**",
+            "**/dev/**",
+            "**/update/**"
+        ],
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php",
+            "packages/antonevers/module-3rdparty/registration.php",
+            "packages/antonevers/module-gra/registration.php",
+            "packages/antonevers/module-local/registration.php"
+        ],
+        "psr-0": {
+            "": [
+                "app/code/",
+                "generated/code/"
+            ]
+        },
+        "psr-4": {
+            "AntonEvers\\Gra\\": "packages/antonevers/module-gra/",
+            "AntonEvers\\Local\\": "packages/antonevers/module-local/",
+            "AntonEvers\\MonorepoBuilderAdobeCommerce\\": "packages/antonevers/lib-monorepo-builder-adobe-commerce/src",
+            "AntonEvers\\ThirdParty\\": "packages/antonevers/module-3rdparty/",
+            "Magento\\": "app/code/Magento/",
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/"
+        }
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "^2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+        "dg/bypass-finals": "^1.4",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "lusitanian/oauth": "^0.8",
+        "magento/magento-coding-standard": "*",
+        "magento/magento2-functional-testing-framework": "^4.3.1",
+        "pdepend/pdepend": "^2.12",
+        "phpmd/phpmd": "^2.13",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^9.5",
+        "sebastian/comparator": "<=4.0.6",
+        "sebastian/phpcpd": "^6.0",
+        "squizlabs/php_codesniffer": "^3.6",
+        "symfony/finder": "^5.4",
+        "symfony/process": "<=v5.4.23"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\PhpStan\\": "dev/tests/static/framework/Magento/PhpStan/",
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    ],
+    "extra": {
+        "magento-force": "override",
+        "map": [
+            {
+                "from": "packages/antonevers/gra-component-foundation/src/gitignore",
+                "to": ".gitignore"
+            },
+            {
+                "dest": ".gitignore",
+                "source": "packages/antonevers/gra-component-foundation/src/gitignore"
+            }
+        ]
+    },
+    "replace": {
+        "antonevers/gra-component-foundation": "self.version",
+        "antonevers/gra-meta-brand-x": "self.version",
+        "antonevers/gra-meta-foundation": "self.version",
+        "antonevers/module-3rdparty": "self.version",
+        "antonevers/module-gra": "self.version",
+        "antonevers/module-local": "self.version",
+        "antonevers/monorepo-builder-adobe-commerce": "self.version"
+    },
+    "conflict": {
+        "gene/bluefoot": "*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php -f packages/antonevers/lib-monorepo-builder-adobe-commerce/bin/copy-map"
+        ],
+        "post-update-cmd": [
+            "php -f packages/antonevers/lib-monorepo-builder-adobe-commerce/bin/copy-map"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,17 @@
+{
+    "name": "antonevers/gra-meta-brand-x",
+    "type": "metapackage",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "antonevers/gra-meta-foundation": "~1.0",
+        "antonevers/module-local": "~1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.1-dev"
+        }
+    }
+}

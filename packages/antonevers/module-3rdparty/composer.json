@@ -1,0 +1,22 @@
+{
+    "name": "antonevers/module-3rdparty",
+    "description": "N/A",
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.1-dev"
+        }
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "AntonEvers\\ThirdParty\\": ""
+        }
+    }
+}

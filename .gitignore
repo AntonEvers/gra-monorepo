@@ -1,0 +1,17 @@
+# Ignore everything in the root except composer files and app/etc/config.php
+/*
+!composer.json
+!composer.lock
+!.gitignore
+
+!/app
+/app/*
+
+!/app/etc
+/app/etc/*
+
+!/app/etc/config.php
+
+# monorepo builder files
+!/packages
+!/monorepo-builder.php
