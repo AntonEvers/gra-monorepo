@@ -1,0 +1,44 @@
+name: 'Packages Split'
+on:
+    push:
+        tags:
+            - '*'
+env:
+    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+jobs:
+    packages_split:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                package:
+                    -
+                        local_path: 'antonevers/module-local'
+                        split_repository: 'readonly-module-local'
+                    -
+                        local_path: 'antonevers/module-gra'
+                        split_repository: 'readonly-module-gra'
+                    -
+                        local_path: 'antonevers/module-3rdparty'
+                        split_repository: 'readonly-module-3rdparty'
+                    -
+                        local_path: 'antonevers/gra-meta-foundation'
+                        split_repository: 'readonly-gra-meta-foundation'
+                    -
+                        local_path: 'antonevers/gra-meta-brand-x'
+                        split_repository: 'readonly-gra-meta-brand-x'
+                    -
+                        local_path: 'antonevers/gra-component-foundation'
+                        split_repository: 'readonly-gra-component-foundation'
+        steps:
+            -   uses: actions/checkout@v2
+            -
+                if: "startsWith(github.ref, 'refs/tags/')"
+                uses: "symplify/monorepo-split-github-action@2.3.0"
+                with:
+                    tag: ${GITHUB_REF#refs/tags/}
+                    package_directory: 'packages/${{ matrix.package.local_path }}'
+                    repository_organization: 'AntonEvers'
+                    repository_name: '${{ matrix.package.split_repository }}'
+                    user_name: "kaizen-ci"
+                    user_email: "info@kaizen-ci.org"
