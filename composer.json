@@ -100,13 +100,13 @@
         ]
     },
     "replace": {
-        "antonevers/gra-component-foundation": "self.version",
-        "antonevers/gra-meta-brand-x": "self.version",
-        "antonevers/gra-meta-foundation": "self.version",
-        "antonevers/module-3rdparty": "self.version",
-        "antonevers/module-gra": "self.version",
-        "antonevers/module-local": "self.version",
-        "antonevers/monorepo-builder-adobe-commerce": "self.version"
+        "antonevers/gra-component-foundation": "1.1.0",
+        "antonevers/gra-meta-brand-x": "1.1.0",
+        "antonevers/gra-meta-foundation": "1.1.0",
+        "antonevers/module-3rdparty": "1.1.0",
+        "antonevers/module-gra": "1.1.0",
+        "antonevers/module-local": "1.1.0",
+        "antonevers/monorepo-builder-adobe-commerce": "1.1.0"
     },
     "conflict": {
         "gene/bluefoot": "*"

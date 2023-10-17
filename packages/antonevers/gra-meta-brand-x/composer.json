@@ -6,8 +6,8 @@
         "AFL-3.0"
     ],
     "require": {
-        "antonevers/gra-meta-foundation": "~1.0",
-        "antonevers/module-local": "~1.0"
+        "antonevers/gra-meta-foundation": "^1.1",
+        "antonevers/module-local": "^1.1"
     },
     "extra": {
         "branch-alias": {
